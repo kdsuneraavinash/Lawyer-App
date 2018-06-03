@@ -70,7 +70,7 @@ class _WelcomeContentState extends State<_WelcomeContent> {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: const Text(
-        "Lawyer Direcotory",
+        "Find your lawyer",
         style: const TextStyle(
           fontSize: 24.0,
           fontFamily: "serif",
@@ -89,7 +89,7 @@ class _WelcomeContentState extends State<_WelcomeContent> {
         shape: new StadiumBorder(),
         color: Theme.of(context).primaryColor,
         textColor: Theme.of(context).canvasColor,
-        child: new Text("Serach"),
+        child: new Text("Search"),
         onPressed: _handleSearchPressed,
       ),
     );
