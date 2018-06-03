@@ -29,27 +29,7 @@ class _WelcomeContentState extends State<_WelcomeContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _buildHeaderContent(context),
-        new Expanded(
-          child: _buildCenterContent(context),
-        ),
-      ],
-    );
-  }
-
-  /// Image
-  /// TODO: Add a more beautiful Image
-  Widget _buildHeaderContent(BuildContext context) {
-    return new Container(
-      padding: new EdgeInsets.only(top: 30.0),
-      color: Colors.black,
-      child: new Image.asset(
-        "images/background.jpg",
-        fit: BoxFit.fitWidth,
-      ),
-    );
+    return _buildCenterContent(context);
   }
 
   /// Central part Image
@@ -59,7 +39,7 @@ class _WelcomeContentState extends State<_WelcomeContent> {
     return new Container(
       decoration: new BoxDecoration(
         image: new DecorationImage(
-          image: new AssetImage("images/background_behind.jpg"),
+          image: new AssetImage("images/background.jpg"),
           fit: BoxFit.cover,
         ),
       ),
