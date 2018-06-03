@@ -32,24 +32,29 @@ class _PageContent extends StatelessWidget {
       children: <Widget>[
         new _Header(lawyer: this.lawyer),
         new ListTile(
+          leading: new Icon(Icons.person),
+          title: new Text("Name"),
+          subtitle: new Text(this.lawyer.name),
+        ),
+        new ListTile(
           leading: new Icon(Icons.location_city),
           title: new Text("Address"),
-          subtitle: new Text("344/1, Moonamalgahawatta, DuwaTemple Rd."),
+          subtitle: new Text(this.lawyer.address),
         ),
         new ListTile(
           leading: new Icon(Icons.call),
           title: new Text("Phone Number"),
-          subtitle: new Text("076-8336850"),
+          subtitle: new Text(this.lawyer.telephone),
         ),
         new ListTile(
           leading: new Icon(Icons.email),
           title: new Text("E Mail"),
-          subtitle: new Text("kdsuneraavinash@gmail.com"),
+          subtitle: new Text(this.lawyer.email),
         ),
         new ListTile(
           leading: new Icon(Icons.work),
           title: new Text("Title"),
-          subtitle: new Text("LLB, attorny-at-law"),
+          subtitle: new Text(this.lawyer.title),
         ),
       ],
     );
