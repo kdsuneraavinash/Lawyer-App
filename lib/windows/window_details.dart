@@ -68,7 +68,7 @@ class _Header extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           height: 180.0,
         ),
-        new _HeaderImage(lawyer: this.lawyer),
+        _buildHeaderImage(context),
         new Padding(
           padding: const EdgeInsets.only(top: 140.0),
           child: new Row(
@@ -109,13 +109,7 @@ class _Header extends StatelessWidget {
     );
   }
 
-  _Header({@required this.lawyer});
-  final Lawyer lawyer;
-}
-
-class _HeaderImage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildHeaderImage(BuildContext context) {
     return new Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: new Stack(
@@ -137,6 +131,6 @@ class _HeaderImage extends StatelessWidget {
     );
   }
 
-  _HeaderImage({@required this.lawyer});
+  _Header({@required this.lawyer});
   final Lawyer lawyer;
 }
