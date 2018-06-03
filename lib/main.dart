@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:lawyer_app/windows/window_welcome.dart';
+import 'package:lawyer_app/windows/welcome.dart';
 
 /// * Project - LawyerApp
 /// * Author  - Sunera Avinash

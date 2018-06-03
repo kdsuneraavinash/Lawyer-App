@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:lawyer_app/windows/window_details.dart';
+import 'package:lawyer_app/windows/lawyer_details.dart';
 import 'package:lawyer_app/helper_widgets/list_tile.dart';
 import 'package:lawyer_app/lawyer.dart';
 

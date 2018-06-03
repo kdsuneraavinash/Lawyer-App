@@ -1,30 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'package:lawyer_app/windows/window_list.dart' as window_list;
+import 'package:lawyer_app/windows/lawyer_list.dart' as window_list;
 
-/// Main Welcome Page
-/// Consists of Images and a Search box to select District
-/// When searched this will direct users to [window_list.LawyerListPage]
-class WelcomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: new _WelcomeContent(),
-    );
-  }
-}
-
-/// All content of [WelcomePage]
+/// All content of [WelcomePage] directory part
 /// Contains
 /// * Header - Image
 /// * Center - Area with background image with search box
-class _WelcomeContent extends StatefulWidget {
+class WelcomeDirectory extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _WelcomeContentState();
+  State<StatefulWidget> createState() => new _WelcomeDirectoryState();
 }
 
 /// [State] of [_WelcomeContent]
-class _WelcomeContentState extends State<_WelcomeContent> {
+class _WelcomeDirectoryState extends State<WelcomeDirectory> {
   final String _selectedDistrict = "Anuradhapura";
 
   @override
@@ -68,16 +56,15 @@ class _WelcomeContentState extends State<_WelcomeContent> {
   /// Card Title
   Widget _buildCardTitle(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
-      child: const Text(
-        "Find your lawyer",
-        style: const TextStyle(
-          fontSize: 24.0,
-          fontFamily: "serif",
-          fontWeight: FontWeight.w500,
-        ),
-        )
-    );
+        padding: const EdgeInsets.all(8.0),
+        child: const Text(
+          "Find your lawyer",
+          style: const TextStyle(
+            fontSize: 24.0,
+            fontFamily: "serif",
+            fontWeight: FontWeight.w500,
+          ),
+        ));
   }
 
   /// Search Button Layout
