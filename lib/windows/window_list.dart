@@ -67,15 +67,9 @@ class _ListItem extends StatefulWidget {
 }
 
 /// This will hold lawyer list item.
-/// Currently each item is a [ListTile].
-/// Will also use a random number generated from lawyer name as his rating.
-/// Avatar color will depend on lawyer rating.
+/// Currently each item is a [LawyerListTile].
 ///
-/// TODO: Implement a better way to generate Avatar.
-///
-/// This will also handle Tapping on [ListTile].
-///
-/// TODO: Implement what happens when user tap on Tile by [_handleListTileOnTap].
+/// This will also handle Tapping on [LawyerListTile].
 class _ListItemState extends State<_ListItem> {
   _ListItemState({this.lawyer});
   final Lawyer lawyer;
