@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:lawyer_app/test_lawyers.dart';
+import 'package:lawyer_app/test_lawyers.dart' as test_list;
 
 enum Sex { MALE, FEMALE }
 
@@ -68,12 +68,12 @@ class Lawyer {
   }
 
   static List createDatabase() {
-    List _lawyers = lawyers;
+    List _lawyers = test_list.lawyers;
     List _resultLawyers = [];
     for (List _eachLawyer in _lawyers) {
       Lawyer newLawyer = new Lawyer.fromList(_eachLawyer);
       _resultLawyers.add(newLawyer);
-    }
+    } 
     return _resultLawyers;
   }
 
