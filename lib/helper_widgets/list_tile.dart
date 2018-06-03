@@ -41,28 +41,13 @@ class LawyerListTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        new Text(
-                          this.lawyer.title,
-                          style: const TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: new Text(
-                            "Polonnaruwa",
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                            ),
-                          ),
-                        ),
-                      ],
+                    new Text(
+                      this.lawyer.title,
+                      style: const TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.italic,
+                      ),
                     ),
                   ],
                 ),
