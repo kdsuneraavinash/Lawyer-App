@@ -28,7 +28,7 @@ class LawyerDetailsPage extends StatelessWidget {
 class _PageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Column(
+    return new ListView(
       children: <Widget>[
         new _Header(lawyer: this.lawyer),
         new ListTile(
