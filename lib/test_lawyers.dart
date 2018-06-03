@@ -27,7 +27,7 @@ List lawyers = [
   ],
   [
     "MS. S. CHANDRASEKARA MUDIYANSELAGE",
-    Sex.MALE,
+    Sex.FEMALE,
     Title.LLB_ATTORNY,
     "DIGANEGAMAELAYAPATHTHUWA,ANURADHAPURA",
     "0783322345",
