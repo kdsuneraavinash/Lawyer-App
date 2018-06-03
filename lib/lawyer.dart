@@ -14,13 +14,14 @@ class Lawyer {
   String _telephone;
   String _email;
 
-  String get name => mapIfNotNull(this._name, capitalize);
-  String get title => mapIfNotNull(this._titles, (List x) => x.join(", "));
-  Sex get sex => mapIfNotNull(this._sex);
-  String get id => mapIfNotNull(this._id);
-  String get address => mapIfNotNull(this._address, capitalize);
-  String get telephone => mapIfNotNull(_telephone);
-  String get email => mapIfNotNull(_email);
+  String get name => (this._name == null) ? "Unnamed" : capitalize(this._name);
+  String get title => (_titles == null) ? "-" : this._titles.join(', ');
+  Sex get sex => (this._sex == null) ? Sex.MALE : this._sex;
+  String get id => (this._id == null) ? "null" : this._id;
+  String get address =>
+      (this._address == null) ? "-" : capitalize(this._address);
+  String get telephone => (this._telephone == null) ? "-" : this._telephone;
+  String get email => (this._email == null) ? "-" : this._email;
 
   Lawyer.fromName(String name) {
     Random random = new Random(name.codeUnitAt(0));
@@ -72,7 +73,7 @@ class Lawyer {
     for (List _eachLawyer in _lawyers) {
       Lawyer newLawyer = new Lawyer.fromList(_eachLawyer);
       _resultLawyers.add(newLawyer);
-    }
+    } 
     return _resultLawyers;
   }
 
@@ -83,14 +84,5 @@ class Lawyer {
       wordsList[i] = word[0] + word.substring(1).toLowerCase();
     }
     return wordsList.join(" ");
-  }
-
-  dynamic mapIfNotNull(dynamic value, [dynamic function]) {
-    if (value == null) {
-      return null;
-    } else {
-    if (function == null) function = (v) => v;
-      return function(value);
-    }
   }
 }

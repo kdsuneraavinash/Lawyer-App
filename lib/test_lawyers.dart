@@ -35,7 +35,7 @@ List lawyers = [
   ],
   [
     "MR. S. GUNARATNE",
-    Sex.MALE,
+    Sex.FEMALE,
     Title.ATTORNY,
     "NO. 2867 B, STAGE 3, ANURADHAPURA",
     "0872211234",
@@ -43,7 +43,7 @@ List lawyers = [
   ],
   [
     "MR. M. DISSANAYAKE",
-    Sex.MALE,
+    Sex.FEMALE,
     Title.ATTORNY,
     "MR. M. DISSANAYAKE",
     "0765544321",

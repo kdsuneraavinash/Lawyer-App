@@ -29,35 +29,35 @@ class _PageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new ListView(
-      children: _buildInfoList(context),
-    );
-  }
-
-  List<Widget> _buildInfoList(BuildContext context) {
-    List<Widget> column = [
-      new _Header(lawyer: this.lawyer),
-    ];
-
-    _addToColumn(column, "Name", this.lawyer.name, Icons.person);
-    _addToColumn(column, "Title", this.lawyer.title, Icons.work);
-    _addToColumn(column, "Address", this.lawyer.address, Icons.location_city);
-    _addToColumn(column, "Phone Number", this.lawyer.telephone, Icons.phone);
-    _addToColumn(column, "E Mail", this.lawyer.email, Icons.email);
-
-    return column;
-  }
-
-  void _addToColumn(
-      List<Widget> column, String title, dynamic value, IconData icon) {
-    if (value != null) {
-      column.add(
+      children: <Widget>[
+        new _Header(lawyer: this.lawyer),
         new ListTile(
-          leading: new Icon(icon),
-          title: new Text(title),
-          subtitle: new Text(value),
+          leading: new Icon(Icons.person),
+          title: new Text("Name"),
+          subtitle: new Text(this.lawyer.name),
         ),
-      );
-    }
+        new ListTile(
+          leading: new Icon(Icons.location_city),
+          title: new Text("Address"),
+          subtitle: new Text(this.lawyer.address),
+        ),
+        new ListTile(
+          leading: new Icon(Icons.call),
+          title: new Text("Phone Number"),
+          subtitle: new Text(this.lawyer.telephone),
+        ),
+        new ListTile(
+          leading: new Icon(Icons.email),
+          title: new Text("E Mail"),
+          subtitle: new Text(this.lawyer.email),
+        ),
+        new ListTile(
+          leading: new Icon(Icons.work),
+          title: new Text("Title"),
+          subtitle: new Text(this.lawyer.title),
+        ),
+      ],
+    );
   }
 
   _PageContent({@required this.lawyer});
