@@ -16,7 +16,7 @@ class LawyerListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Lawyers in ${this.district}"),
+        title: new Text("${this.district}"),
       ),
       body: new _PageContent(),
     );

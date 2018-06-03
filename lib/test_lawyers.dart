@@ -26,6 +26,14 @@ List lawyers = [
     null,
   ],
   [
+    "MS. S. CHANDRASEKARA MUDIYANSELAGE",
+    Sex.MALE,
+    Title.LLB_ATTORNY,
+    "DIGANEGAMAELAYAPATHTHUWA,ANURADHAPURA",
+    "0783322345",
+    null
+  ],
+  [
     "MS. K. ANURADHANAYAKE",
     Sex.FEMALE,
     Title.ATTORNY,
@@ -49,4 +57,28 @@ List lawyers = [
     "0765544321",
     "asiri422@hotmail.com",
   ],
+  [
+    "MS. J. DISSANAYAKE",
+    Sex.FEMALE,
+    Title.ATTORNY,
+    "ETAKALEKIRALOGAMA, ANURADHAPURA",
+    "0762223423",
+    null
+  ],
+  [
+    "MS. J. JAYAWICKRAMA",
+    Sex.FEMALE,
+    Title.ATTORNY,
+    "MIHINDU MAWTHA,KALATTEWA, KURUNDHANKULAMA, ANURADHAPURA",
+    "0712234765",
+    null
+  ],
+  [
+    "MS. D. HETTIARACHCHI",
+    Sex.FEMALE,
+    Title.ATTORNY,
+    "NO. 488/20/01,7TH LANE,TOWN HALL PLACE,NEW TOWN, ANURADHAPURA",
+    "0754323456",
+    "priyanthihettiarachchi2@gmail.com"
+  ]
 ];
