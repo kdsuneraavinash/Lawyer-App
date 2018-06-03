@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:lawyer_app/lawyer.dart';
 import 'package:lawyer_app/helper_widgets/push_button.dart';
 import 'package:lawyer_app/helper_widgets/avatar.dart';
+
+enum LaunchMethod { MAIL, CALL, MESSAGE }
 
 class LawyerDetailsPage extends StatelessWidget {
   @override
@@ -87,7 +90,8 @@ class _Header extends StatelessWidget {
                 color: Colors.deepOrange,
                 splashColor: Colors.orange,
                 size: 25.0,
-                onPressed: () => null,
+                enabled: (this.lawyer.telephone != null),
+                onPressed: () => launchAction(this.lawyer.telephone, LaunchMethod.MESSAGE),
               ),
               new PushButton(
                 icon: defaultTargetPlatform == TargetPlatform.iOS
@@ -96,7 +100,8 @@ class _Header extends StatelessWidget {
                 color: Colors.green,
                 splashColor: Colors.lightGreen,
                 size: 40.0,
-                onPressed: () => null,
+                enabled: (this.lawyer.telephone != null),
+                onPressed: () => launchAction(this.lawyer.telephone, LaunchMethod.CALL),
               ),
               new PushButton(
                 icon: defaultTargetPlatform == TargetPlatform.iOS
@@ -105,13 +110,37 @@ class _Header extends StatelessWidget {
                 color: Colors.blue,
                 splashColor: Colors.lightBlue,
                 size: 25.0,
-                onPressed: () => null,
+                enabled: (this.lawyer.email != null),
+                onPressed: () => launchAction(this.lawyer.email, LaunchMethod.MAIL),
               ),
             ],
           ),
         ),
       ],
     );
+  }
+
+  void launchAction(dynamic value, LaunchMethod method) async {
+    if (value == null) return;
+    String url;
+
+    switch (method) {
+      case LaunchMethod.CALL:
+        url = "tel:$value";
+        break;
+      case LaunchMethod.MESSAGE:
+        url = "sms:$value";
+        break;
+      case LaunchMethod.MAIL:
+        url = "mailto:$value";
+        break;
+    }
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      return;
+    }
   }
 
   Widget _buildHeaderImage(BuildContext context) {

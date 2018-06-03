@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 class PushButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    dynamic function = this.onPressed;
+
+    if (!this.enabled) function = null;
     return new Padding(
       padding: new EdgeInsets.fromLTRB(0.0, 20.0 - this.size / 2, 0.0, 10.0),
       child: RaisedButton(
@@ -13,9 +16,10 @@ class PushButton extends StatelessWidget {
           color: this.color,
         ),
         shape: new CircleBorder(),
-        onPressed: this.onPressed,
+        onPressed: function,
         color: Theme.of(context).cardColor,
         splashColor: this.splashColor,
+        disabledColor: Colors.grey,
       ),
     );
   }
@@ -25,10 +29,12 @@ class PushButton extends StatelessWidget {
       this.color,
       this.size = 40.0,
       this.onPressed,
-      this.splashColor});
+      this.splashColor,
+      this.enabled=true});
   final IconData icon;
   final Color color;
   final Color splashColor;
   final double size;
   final VoidCallback onPressed;
+  final bool enabled;
 }
