@@ -27,7 +27,6 @@ flutter:
 
   assets:
     - images/background.jpg
-    - background_behind.jpg
     - images/male.png
     - images/female.png
 
