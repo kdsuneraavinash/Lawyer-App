@@ -53,6 +53,8 @@ class _WelcomeContentState extends State<_WelcomeContent> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              _buildCardTitle(context),
+              const Divider(),
               _buildSearchLabel(context),
               _buildDistrictField(context),
               _buildSearchButton(context),
@@ -60,6 +62,21 @@ class _WelcomeContentState extends State<_WelcomeContent> {
           ),
         ),
       ),
+    );
+  }
+
+  /// Card Title
+  Widget _buildCardTitle(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      child: const Text(
+        "Lawyer Direcotory",
+        style: const TextStyle(
+          fontSize: 24.0,
+          fontFamily: "serif",
+          fontWeight: FontWeight.w500,
+        ),
+        )
     );
   }
 
