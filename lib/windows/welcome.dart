@@ -18,7 +18,7 @@ class _WelcomePageState extends State<WelcomePage> {
   List<Widget> pages;
 
   @override
-  void initState() {
+  initState() {
     pages = [
       new directory.WelcomeDirectory(),
       new lawnet.WelcomeLawnet(),
@@ -42,7 +42,7 @@ class _WelcomePageState extends State<WelcomePage> {
               title: new Text("Directory")),
           new BottomNavigationBarItem(
               icon: const Icon(Icons.book),
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.brown,
               title: new Text("LawNet")),
         ],
       ),

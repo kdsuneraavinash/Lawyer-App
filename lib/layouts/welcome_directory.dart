@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:lawyer_app/windows/lawyer_list.dart' as window_list;
+import 'package:lawyer_app/helper_widgets/rounded_button.dart';
+import 'package:lawyer_app/helper_widgets/container_card.dart';
 
 /// All content of [WelcomePage] directory part
 /// Contains
@@ -28,12 +30,12 @@ class _WelcomeDirectoryState extends State<WelcomeDirectory> {
       decoration: new BoxDecoration(
         image: new DecorationImage(
           image: new AssetImage("images/background.jpg"),
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
       ),
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: new Card(
+      child: new ContainerCard(
         child: new Padding(
           padding: const EdgeInsets.all(8.0),
           child: new Column(
@@ -45,7 +47,10 @@ class _WelcomeDirectoryState extends State<WelcomeDirectory> {
               const Divider(),
               _buildSearchLabel(context),
               _buildDistrictField(context),
-              _buildSearchButton(context),
+              new RoundedButton(
+                text: "Search",
+                onPressed: _handleSearchPressed,
+              ),
             ],
           ),
         ),
@@ -55,29 +60,15 @@ class _WelcomeDirectoryState extends State<WelcomeDirectory> {
 
   /// Card Title
   Widget _buildCardTitle(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(8.0),
-        child: const Text(
-          "Find your lawyer",
-          style: const TextStyle(
-            fontSize: 24.0,
-            fontFamily: "serif",
-            fontWeight: FontWeight.w500,
-          ),
-        ));
-  }
-
-  /// Search Button Layout
-  Widget _buildSearchButton(BuildContext context) {
     return new Container(
-      alignment: Alignment.bottomRight,
       padding: const EdgeInsets.all(8.0),
-      child: new RaisedButton(
-        shape: new StadiumBorder(),
-        color: Theme.of(context).primaryColor,
-        textColor: Theme.of(context).canvasColor,
-        child: new Text("Search"),
-        onPressed: _handleSearchPressed,
+      child: const Text(
+        "Find your lawyer",
+        style: const TextStyle(
+          fontSize: 24.0,
+          fontFamily: "serif",
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
