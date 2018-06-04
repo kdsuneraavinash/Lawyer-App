@@ -47,9 +47,18 @@ class _WelcomeDirectoryState extends State<WelcomeDirectory> {
               const Divider(),
               _buildSearchLabel(context),
               _buildDistrictField(context),
-              new RoundedButton(
-                text: "Search",
-                onPressed: _handleSearchPressed,
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  new RoundedButton(
+                    text: "Favourites",
+                    onPressed: _handleSearchPressed,
+                  ),
+                  new RoundedButton(
+                    text: "Search",
+                    onPressed: _handleSearchPressed,
+                  ),
+                ],
               ),
             ],
           ),

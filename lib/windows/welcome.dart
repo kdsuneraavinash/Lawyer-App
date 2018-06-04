@@ -22,6 +22,7 @@ class _WelcomePageState extends State<WelcomePage> {
     pages = [
       new directory.WelcomeDirectory(),
       new lawnet.WelcomeLawnet(),
+      new Container(color: Colors.black,)
     ];
     currentPage = 0;
     super.initState();
@@ -37,13 +38,20 @@ class _WelcomePageState extends State<WelcomePage> {
         currentIndex: currentPage,
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(
-              icon: const Icon(Icons.search),
-              backgroundColor: Colors.black,
-              title: new Text("Directory")),
+            icon: const Icon(Icons.contacts),
+            backgroundColor: Colors.black,
+            title: new Text("Directory"),
+          ),
           new BottomNavigationBarItem(
-              icon: const Icon(Icons.book),
-              backgroundColor: Colors.brown[900],
-              title: new Text("LawNet")),
+            icon: const Icon(Icons.search),
+            backgroundColor: Colors.brown[900],
+            title: new Text("LawNet"),
+          ),
+          new BottomNavigationBarItem(
+            icon: const Icon(Icons.developer_board),
+            backgroundColor: Colors.black,
+            title: new Text("About"),
+          ),
         ],
       ),
     );

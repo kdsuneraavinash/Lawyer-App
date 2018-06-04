@@ -26,7 +26,7 @@ class _WelcomeLawnetContent extends StatefulWidget {
 
 class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
   TextEditingController _textcontroller;
-  List<bool> _searchOptions = [false, true, true];
+  List<bool> _searchOptions = [false, true, false];
   Requests _virtualBrowser;
   Widget _searchResults;
   final _searchingIndicator = new Center(
@@ -119,9 +119,55 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
     setState(() {
       _searchResults = _searchingIndicator;
     });
-    String page = await this._virtualBrowser.post(_textcontroller.text,
+    List data = await this._virtualBrowser.post(_textcontroller.text,
         this._searchOptions[0], this._searchOptions[1], this._searchOptions[2]);
-    print(page);
+    List<Widget> _searchResultList = [];
+
+    for (Map block in data) {
+      Widget _searchResult = new Container(
+        child: new Column(
+          children: <Widget>[
+            new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new Text(
+                "${block["title"]} [${block["asp_date"]}]",
+                style: new TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new Text(
+                "${block["content"]}",
+                style: new TextStyle(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new Text(
+                "${block["asp_res_url_href"]}",
+                style: new TextStyle(
+                  fontSize: 10.0,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.italic
+                ),
+                textAlign: TextAlign.right,
+              ),
+            ),
+            new Divider(),
+          ],
+        ),
+      );
+      _searchResultList.add(_searchResult);
+    }
+
     setState(
       () {
         _searchResults = new Padding(
@@ -129,7 +175,9 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
           child: new ContainerCard(
             child: new Padding(
               padding: const EdgeInsets.all(8.0),
-              child: new Text(page),
+              child: new Column(
+                children: _searchResultList,
+              ),
             ),
           ),
         );
@@ -172,13 +220,16 @@ class _SettingsDialogState extends State<_SettingsDialog> {
   Widget build(BuildContext context) {
     return new SimpleDialog(
       children: <Widget>[
-        _buildCheckBox("Search Exact Text", 0, context),
-        _buildCheckBox("Search in Titles", 1, context),
-        _buildCheckBox("Search in Content", 2, context),
+        _buildCheckBox(context, "Search Exact Text",
+            "Results will contain the exact search text.", 0),
+        _buildCheckBox(
+            context, "Search in Titles", "Every title will be searched.", 1),
+        _buildCheckBox(context, "Search in Content",
+            "All of the content will be searched.", 2),
         new Padding(
           padding: const EdgeInsets.all(8.0),
           child: new FlatButton(
-            child: new Text("OK"),
+            child: const Text("OK"),
             textColor: Theme.of(context).primaryColor,
             onPressed: () => Navigator.pop(context),
           ),
@@ -187,9 +238,12 @@ class _SettingsDialogState extends State<_SettingsDialog> {
     );
   }
 
-  Widget _buildCheckBox(String text, int index, BuildContext context) {
+  Widget _buildCheckBox(
+      BuildContext context, String text, String message, int index) {
     return new CheckboxListTile(
       title: new Text(text),
+      subtitle: new Text(message),
+      isThreeLine: true,
       onChanged: (v) => _handleSearchOptionCheck(index, v),
       value: _searchOptions[index],
       activeColor: Theme.of(context).primaryColor,

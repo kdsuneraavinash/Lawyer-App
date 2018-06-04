@@ -12,6 +12,7 @@ dependencies:
   url_launcher: ^3.0.2
   # Make HTTP Requests
   http: ^0.11.3+16
+  html: any
 
 dev_dependencies:
   flutter_test:
