@@ -42,7 +42,7 @@ class _WelcomePageState extends State<WelcomePage> {
               title: new Text("Directory")),
           new BottomNavigationBarItem(
               icon: const Icon(Icons.book),
-              backgroundColor: Colors.brown,
+              backgroundColor: Colors.brown[900],
               title: new Text("LawNet")),
         ],
       ),
