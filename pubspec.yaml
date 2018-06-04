@@ -10,8 +10,6 @@ dependencies:
   cupertino_icons: ^0.1.2
   # Library to launch phone calls, messages and email.
   url_launcher: ^3.0.2
-  # Webview to show webpages
-  flutter_webview_plugin: ^0.1.0
 
 dev_dependencies:
   flutter_test:
