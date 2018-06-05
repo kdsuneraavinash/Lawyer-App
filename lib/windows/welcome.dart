@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:lawyer_app/layouts/welcome_directory.dart' as directory;
 import 'package:lawyer_app/layouts/welcome_lawnet.dart' as lawnet;
+import 'package:lawyer_app/layouts/welocome_settings.dart' as settings;
 
 /// Main Welcome Page
 /// Consists of Images and a Search box to select District
@@ -22,7 +23,7 @@ class _WelcomePageState extends State<WelcomePage> {
     pages = [
       new directory.WelcomeDirectory(),
       new lawnet.WelcomeLawnet(),
-      new Container(color: Colors.black,)
+      new settings.SettingsPage()
     ];
     currentPage = 0;
     super.initState();
@@ -48,9 +49,9 @@ class _WelcomePageState extends State<WelcomePage> {
             title: new Text("LawNet"),
           ),
           new BottomNavigationBarItem(
-            icon: const Icon(Icons.developer_board),
+            icon: const Icon(Icons.settings_applications),
             backgroundColor: Colors.black,
-            title: new Text("About"),
+            title: new Text("Settings"),
           ),
         ],
       ),
