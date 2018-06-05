@@ -55,21 +55,29 @@ class Requests {
   void searchResultCrawler(Element elem, Map<String, String> path) {
     switch (elem.className) {
       case "asp_res_url":
-        path["asp_res_url_href"] = elem.attributes["href"];
+        path["link"] = elem.attributes["href"];
         path["title"] = elem.text.trim();
         break;
       case "asp_date":
-        path["asp_date"] = elem.text.trim();
+        path["date"] = elem.text.trim();
         break;
       case "asp_content":
         path["content"] = elem.text.trim();
         break;
       case "asp_spacer":
-        path["content"] = path["content"].replaceAll(path["asp_date"], "");
-        path["content"] = path["content"].replaceAll(path["title"], "");
-        path["content"] = path["content"].split(".pdf").last;
-        path["content"] = path["content"].replaceAll("\n", "");
-        path["content"] = path["content"].trim();
+        String content = path["content"];
+        List<String> contentList = content
+            .replaceAll(path["date"], "")
+            .replaceAll(path["title"], "")
+            .replaceAll(r"\n", "")
+            .split(".pdf");
+        String pdf;
+        if (contentList.length == 2){
+          pdf = contentList.first.trim();
+        }
+        content = contentList.last.trim();
+        path["content"] = content;
+        path["link"] = (pdf == null) ? null : path["link"];
         parsedData.add(new Map<String, String>.from(path));
         path.clear();
         break;

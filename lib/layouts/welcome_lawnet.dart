@@ -6,6 +6,9 @@ import 'package:lawyer_app/helper_widgets/rounded_button.dart';
 import 'package:lawyer_app/lawnet_requests.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Window to handle all lawnet actions
+/// Will be used to search lawnet.lk
+/// Theme is different than normal
 class WelcomeLawnet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,19 +27,27 @@ class _WelcomeLawnetContent extends StatefulWidget {
       new _WelcomeLawnetContentState();
 }
 
+/// All will be bulild here
 class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
+  // Control textbox
   TextEditingController _textcontroller;
+  // Search options
   List<bool> _searchOptions = [false, true, false];
+  // Browser to send http posts
   Requests _virtualBrowser;
+  // All results
   Widget _searchResults;
+  // No results found yet
   final _searchingIndicator = new Center(
     child: new CircularProgressIndicator(),
   );
 
   @override
   void initState() {
+    // Initialize virtual browser, text box and search results
     _virtualBrowser = new Requests();
     _textcontroller = new TextEditingController();
+    // No search results
     _searchResults = new Container();
     super.initState();
   }
@@ -44,7 +55,12 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
   @override
   void dispose() {
     super.dispose();
+    // Disconnect browser
+    try{
     _virtualBrowser.client.close();
+    }catch(Exception){
+      print("Disconnected while recieving data.");
+    }
   }
 
   @override
@@ -65,6 +81,7 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
     );
   }
 
+  /// Search bar at top
   Widget _buildSearchbar() {
     return new Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 16.0),
@@ -115,22 +132,19 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
     );
   }
 
-  void _handleSearch() async {
-    setState(() {
-      _searchResults = _searchingIndicator;
-    });
-    List data = await this._virtualBrowser.post(_textcontroller.text,
-        this._searchOptions[0], this._searchOptions[1], this._searchOptions[2]);
-    List<Widget> _searchResultList = [];
-
-    for (Map block in data) {
-      Widget _searchResult = new Container(
+  /// Each search result
+  /// Will be based off 'block'
+  /// When clicked, will go to the corresponding pdf
+  Widget _buildSearchReult(Map<String, String> block) {
+    return new InkWell(
+      onTap: () => _launchUrl("${block["link"]}"),
+      child: new Container(
         child: new Column(
           children: <Widget>[
-            new Padding(
+            new Container(
               padding: const EdgeInsets.all(8.0),
               child: new Text(
-                "${block["title"]} [${block["asp_date"]}]",
+                "${block["title"]} [${block["date"]}]",
                 style: new TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.w600,
@@ -138,7 +152,13 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
                 textAlign: TextAlign.center,
               ),
             ),
-            new Padding(
+            new Container(
+              decoration: new BoxDecoration(
+                color: Colors.grey[100],
+                border: new Border.all(
+                  color: Colors.black,
+                ),
+              ),
               padding: const EdgeInsets.all(8.0),
               child: new Text(
                 "${block["content"]}",
@@ -149,25 +169,30 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
                 textAlign: TextAlign.left,
               ),
             ),
-            new Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: new Text(
-                "${block["asp_res_url_href"]}",
-                style: new TextStyle(
-                  fontSize: 10.0,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.italic
-                ),
-                textAlign: TextAlign.right,
-              ),
-            ),
             new Divider(),
           ],
         ),
-      );
-      _searchResultList.add(_searchResult);
+      ),
+    );
+  }
+
+  /// Search button event
+  void _handleSearch() async {
+    setState(() {
+      // Still searching
+      _searchResults = _searchingIndicator;
+    });
+    // Search
+    List data = await this._virtualBrowser.post(_textcontroller.text,
+        this._searchOptions[0], this._searchOptions[1], this._searchOptions[2]);
+    List<Widget> _searchResultList = [];
+
+    // Searched
+    for (Map block in data) {
+      _searchResultList.add(_buildSearchReult(block));
     }
 
+    // Now show results
     setState(
       () {
         _searchResults = new Padding(
@@ -185,15 +210,24 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
     );
   }
 
-  void _handleVisitWeb() async {
+  // Visit web site
+  void _handleVisitWeb() {
     String url = "https://www.lawnet.gov.lk/";
+    _launchUrl(url);
+  } // Launch a url
+
+  void _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
+      print(url);
     } else {
+      // TODO: Remove this line
+      print("Launch Failed :\n$url");
       return;
     }
   }
 
+  // Show search settings dialog
   void _handleSearchSettings(BuildContext context) {
     showDialog(
       context: context,
@@ -202,6 +236,7 @@ class _WelcomeLawnetContentState extends State<_WelcomeLawnetContent> {
   }
 }
 
+/// Search settings dialog
 class _SettingsDialog extends StatefulWidget {
   _SettingsDialog(this._searchOptions);
   final List _searchOptions;

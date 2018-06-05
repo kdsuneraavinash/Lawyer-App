@@ -15,7 +15,42 @@ class WelcomeDirectory extends StatefulWidget {
 
 /// [State] of [_WelcomeContent]
 class _WelcomeDirectoryState extends State<WelcomeDirectory> {
-  final String _selectedDistrict = "Anuradhapura";
+  List<String> _districts = [
+    "Gampaha",
+    "Colombo",
+    "Kalutara",
+    "",
+    "Matale",
+    "Kandy",
+    "Nuwara Eliya",
+    "",
+    "Badulla",
+    "Monaragala",
+    "",
+    "Hambantota",
+    "Matara",
+    "Galle",
+    "",
+    "Anuradhapura",
+    "Polonnaruwa",
+    "",
+    "Kegalle",
+    "Ratnapura",
+    "",
+    "Jaffna",
+    "Kilinochchi",
+    "Mannar",
+    "Mullaitivu",
+    "Vavuniya",
+    "",
+    "Puttalam",
+    "Kurunegala",
+    "",
+    "Trincomalee",
+    "Batticaloa",
+    "Ampara",
+  ];
+  int _selectedDistrict = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +86,8 @@ class _WelcomeDirectoryState extends State<WelcomeDirectory> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   new RoundedButton(
-                    text: "Favourites",
-                    onPressed: _handleSearchPressed,
+                    text: "Pinned",
+                    onPressed: () => null,
                   ),
                   new RoundedButton(
                     text: "Search",
@@ -89,7 +124,7 @@ class _WelcomeDirectoryState extends State<WelcomeDirectory> {
           PageRouteBuilder(
             opaque: false,
             pageBuilder: (_, __, ___) => new window_list.LawyerListPage(
-                  district: _selectedDistrict,
+                  district: _districts[_selectedDistrict],
                 ),
             transitionsBuilder:
                 (_, Animation<double> animation, __, Widget child) {
@@ -115,10 +150,73 @@ class _WelcomeDirectoryState extends State<WelcomeDirectory> {
         child: new Container(
           width: double.infinity,
           padding: const EdgeInsets.all(8.0),
-          child: new Text(_selectedDistrict),
+          child: new Text(_districts[_selectedDistrict]),
         ),
-        onPressed: () => null,
+        onPressed: () => _handleSelectDistrict(context),
       ),
+    );
+  }
+
+  void _handleSelectDistrict(BuildContext context) {
+    List<Widget> _options = [];
+    for (int i = 0; i < _districts.length; i++) {
+      if (_districts[i] == "") {
+        _options.add(new Divider());
+        continue;
+      }
+      _options.add(
+        new InkWell(
+          onTap: () {
+            setState(() {
+              _selectedDistrict = i;
+            });
+            Navigator.pop(context);
+          },
+          child: new Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+            child: new Row(
+              children: <Widget>[
+                new Container(
+                  decoration: new ShapeDecoration(
+                    shape: new CircleBorder(
+                      side: new BorderSide(
+                        width: 10.0,
+                        color: (i == _selectedDistrict)
+                            ? Colors.red
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new Text(_districts[i]),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    showDialog(
+      context: context,
+      builder: (_) => new SimpleDialog(
+            children: _options,
+            title: new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  new Text("Select District"),
+                  new IconButton(
+                      icon: new Icon(Icons.cancel),
+                      onPressed: () => Navigator.pop(context))
+                ],
+              ),
+            ),
+          ),
     );
   }
 
