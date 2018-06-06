@@ -4,41 +4,50 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:lawyer_app/lawyer.dart';
-import 'package:lawyer_app/helper_widgets/push_button.dart';
-import 'package:lawyer_app/helper_widgets/avatar.dart';
+import 'package:lawyer_app/utils/lawyer.dart' show Lawyer;
+
+import 'package:lawyer_app/widgets/push_button.dart' show PushButton;
+import 'package:lawyer_app/widgets/avatar.dart' show LawyerAvatar;
 
 enum LaunchMethod { MAIL, CALL, MESSAGE }
 
+/// * Page to show details
+/// Will show each lawyer details like phone number ...
 class LawyerDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(lawyer.name),
-        elevation: 0.0,
-      ),
-      body: new _PageContent(
-        lawyer: this.lawyer,
+    return Theme(
+      // ! Unclean : Find a good way to change entire app theme
+      data: themeData,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(lawyer.name),
+          elevation: 0.0,
+        ),
+        body: LawyerDetailsPageContent(
+          lawyer: this.lawyer,
+        ),
       ),
     );
   }
 
-  LawyerDetailsPage({@required this.lawyer});
+  LawyerDetailsPage({@required this.lawyer, @required this.themeData});
   final Lawyer lawyer;
+  final ThemeData themeData;
 }
 
-class _PageContent extends StatelessWidget {
+class LawyerDetailsPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new ListView(
+    return ListView(
       children: _buildInfoList(context),
     );
   }
 
+  /// * Build the column which will include all info list tiles
   List<Widget> _buildInfoList(BuildContext context) {
     List<Widget> column = [
-      new _Header(lawyer: this.lawyer),
+      LawyerDetailsPageHeader(lawyer: this.lawyer),
     ];
 
     _addToColumn(column, "Name", this.lawyer.name, Icons.person);
@@ -50,40 +59,42 @@ class _PageContent extends StatelessWidget {
     return column;
   }
 
+  /// * add to Column as a list tile
   void _addToColumn(
       List<Widget> column, String title, dynamic value, IconData icon) {
     if (value != null) {
       column.add(
-        new ListTile(
-          leading: new Icon(icon),
-          title: new Text(title),
-          subtitle: new Text(value),
+        ListTile(
+          leading: Icon(icon),
+          title: Text(title),
+          subtitle: Text(value),
         ),
       );
     }
   }
 
-  _PageContent({@required this.lawyer});
+  LawyerDetailsPageContent({@required this.lawyer});
   final Lawyer lawyer;
 }
 
-class _Header extends StatelessWidget {
+/// * Header which includes Person Avatar and 3 push buttons
+class LawyerDetailsPageHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Stack(
+    return Stack(
       children: <Widget>[
-        new Container(
+        Container(
           color: Theme.of(context).primaryColor,
           height: 180.0,
         ),
         _buildHeaderImage(context),
-        new Padding(
-          padding: const EdgeInsets.only(top: 140.0),
-          child: new Row(
+        Padding(
+          padding: EdgeInsets.only(top: 140.0),
+          child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new PushButton(
+              PushButton(
                 icon: defaultTargetPlatform == TargetPlatform.iOS
                     ? CupertinoIcons.conversation_bubble
                     : Icons.chat,
@@ -91,9 +102,10 @@ class _Header extends StatelessWidget {
                 splashColor: Colors.orange,
                 size: 25.0,
                 enabled: (this.lawyer.telephone != null),
-                onPressed: () => launchAction(this.lawyer.telephone, LaunchMethod.MESSAGE),
+                onPressed: () =>
+                    launchAction(this.lawyer.telephone, LaunchMethod.MESSAGE),
               ),
-              new PushButton(
+              PushButton(
                 icon: defaultTargetPlatform == TargetPlatform.iOS
                     ? CupertinoIcons.phone
                     : Icons.phone,
@@ -101,9 +113,10 @@ class _Header extends StatelessWidget {
                 splashColor: Colors.lightGreen,
                 size: 40.0,
                 enabled: (this.lawyer.telephone != null),
-                onPressed: () => launchAction(this.lawyer.telephone, LaunchMethod.CALL),
+                onPressed: () =>
+                    launchAction(this.lawyer.telephone, LaunchMethod.CALL),
               ),
-              new PushButton(
+              PushButton(
                 icon: defaultTargetPlatform == TargetPlatform.iOS
                     ? Icons.alternate_email
                     : Icons.email,
@@ -111,7 +124,8 @@ class _Header extends StatelessWidget {
                 splashColor: Colors.lightBlue,
                 size: 25.0,
                 enabled: (this.lawyer.email != null),
-                onPressed: () => launchAction(this.lawyer.email, LaunchMethod.MAIL),
+                onPressed: () =>
+                    launchAction(this.lawyer.email, LaunchMethod.MAIL),
               ),
             ],
           ),
@@ -120,6 +134,7 @@ class _Header extends StatelessWidget {
     );
   }
 
+  /// * Launch in default app
   void launchAction(dynamic value, LaunchMethod method) async {
     if (value == null) return;
     String url;
@@ -144,20 +159,20 @@ class _Header extends StatelessWidget {
   }
 
   Widget _buildHeaderImage(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: new Stack(
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      child: Stack(
         children: <Widget>[
-          new Padding(
-            padding: const EdgeInsets.only(top: 60.0, left: 50.0, right: 50.0),
-            child: new Divider(
+          Padding(
+            padding: EdgeInsets.only(top: 60.0, left: 50.0, right: 50.0),
+            child: Divider(
               color: Colors.white,
             ),
           ),
-          new Center(
-            child: new Hero(
+          Center(
+            child: Hero(
               tag: this.lawyer,
-              child: new LawyerAvatar(lawyer.sex, 120.0),
+              child: LawyerAvatar(lawyer.sex, 120.0),
             ),
           ),
         ],
@@ -165,6 +180,6 @@ class _Header extends StatelessWidget {
     );
   }
 
-  _Header({@required this.lawyer});
+  LawyerDetailsPageHeader({@required this.lawyer});
   final Lawyer lawyer;
 }

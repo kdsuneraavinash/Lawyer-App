@@ -1,6 +1,6 @@
-import 'package:lawyer_app/lawyer.dart';
+import 'package:lawyer_app/utils/lawyer.dart';
 
-List lawyers = [
+const List LAWYERS = [
   [
     'MR. A. ABERATHNA AMUNUGAMA',
     Sex.MALE,
@@ -53,7 +53,7 @@ List lawyers = [
     "MR. M. DISSANAYAKE",
     Sex.MALE,
     Title.ATTORNY,
-    "MR. M. DISSANAYAKE",
+    "DIGANEGAMAELAYAPATHTHUWA,ANURADHAPURA",
     "0765544321",
     "asiri422@hotmail.com",
   ],

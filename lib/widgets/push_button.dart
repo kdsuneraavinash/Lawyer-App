@@ -6,16 +6,16 @@ class PushButton extends StatelessWidget {
     dynamic function = this.onPressed;
 
     if (!this.enabled) function = null;
-    return new Padding(
-      padding: new EdgeInsets.fromLTRB(0.0, 20.0 - this.size / 2, 0.0, 10.0),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0.0, 20.0 - this.size / 2, 0.0, 10.0),
       child: RaisedButton(
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(20.0),
         child: Icon(
           icon,
           size: this.size,
           color: this.color,
         ),
-        shape: new CircleBorder(),
+        shape: CircleBorder(),
         onPressed: function,
         color: Theme.of(context).cardColor,
         splashColor: this.splashColor,

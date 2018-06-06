@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:lawyer_app/test_lawyers.dart' as test_list;
+import 'package:lawyer_app/values/test_lawyers.dart' show LAWYERS;
 
 enum Sex { MALE, FEMALE }
 
@@ -14,6 +12,7 @@ class Lawyer {
   String _telephone;
   String _email;
 
+  // * Getters
   String get name => mapIfNotNull(this._name, capitalize);
   String get title => mapIfNotNull(this._titles, (List x) => x.join(", "));
   Sex get sex => mapIfNotNull(this._sex);
@@ -22,23 +21,7 @@ class Lawyer {
   String get telephone => mapIfNotNull(_telephone);
   String get email => mapIfNotNull(_email);
 
-  Lawyer.fromName(String name) {
-    Random random = new Random(name.codeUnitAt(0));
-    this._name = name;
-    this._id = name
-        .toLowerCase()
-        .replaceAll(new RegExp(r"\s+\b|\b\s"), "")
-        .replaceAll(new RegExp(r"\."), "");
-
-    if (random.nextInt(10000) % 2 == 1) {
-      this._titles = ["attorny-at-law"];
-    } else {
-      this._titles = ["LLB", "attorny-at-law"];
-    }
-
-    this._sex = (random.nextInt(100000) % 2) == 0 ? Sex.MALE : Sex.FEMALE;
-  }
-
+  // * Load from a given List
   Lawyer.fromList(List package) {
     String unpackedName = package[0];
     Sex unpackedSex = package[1];
@@ -50,8 +33,8 @@ class Lawyer {
     this._name = unpackedName;
     this._id = unpackedName
         .toLowerCase()
-        .replaceAll(new RegExp(r"\s+\b|\b\s"), "")
-        .replaceAll(new RegExp(r"\."), "");
+        .replaceAll(RegExp(r"\s+\b|\b\s"), "")
+        .replaceAll(RegExp(r"\."), "");
 
     if (unpackedTitle == Title.ATTORNY) {
       this._titles = ["attorny-at-law"];
@@ -66,30 +49,33 @@ class Lawyer {
     this._email = unpackedEmail;
   }
 
+  /// * Test Method - Create set of Lawyers from a 2D list
   static List createDatabase() {
-    List _lawyers = test_list.lawyers;
     List _resultLawyers = [];
-    for (List _eachLawyer in _lawyers) {
-      Lawyer newLawyer = new Lawyer.fromList(_eachLawyer);
+    for (List _eachLawyer in LAWYERS) {
+      Lawyer newLawyer = Lawyer.fromList(_eachLawyer);
       _resultLawyers.add(newLawyer);
     }
     return _resultLawyers;
   }
 
-  String capitalize(String words) {
-    List wordsList = words.split(" ");
+  /// * Capitalize Function
+  String capitalize(String words, [String seperator = " "]) {
+    List wordsList = words.split(seperator);
     for (int i = 0; i < wordsList.length; i++) {
       String word = wordsList[i];
       wordsList[i] = word[0] + word.substring(1).toLowerCase();
     }
-    return wordsList.join(" ");
+    return wordsList.join(seperator);
   }
 
+  /// * Map to a function if not null
+  /// Created for use of getters
   dynamic mapIfNotNull(dynamic value, [dynamic function]) {
     if (value == null) {
       return null;
     } else {
-    if (function == null) function = (v) => v;
+      if (function == null) function = (v) => v;
       return function(value);
     }
   }

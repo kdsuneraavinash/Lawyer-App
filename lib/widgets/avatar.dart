@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lawyer_app/lawyer.dart';
+
+import 'package:lawyer_app/utils/lawyer.dart' show Sex;
 
 /// Lawyer Profile Image
 /// Image depend on Lawyer Gender
@@ -7,9 +8,9 @@ import 'package:lawyer_app/lawyer.dart';
 class LawyerAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      padding: const EdgeInsets.all(5.0),
-      child: new Image.asset(
+    return Container(
+      padding: EdgeInsets.all(5.0),
+      child: Image.asset(
         (sex == Sex.MALE) ? "images/male.png" : "images/female.png",
         width: this.width,
         fit: BoxFit.fitWidth,

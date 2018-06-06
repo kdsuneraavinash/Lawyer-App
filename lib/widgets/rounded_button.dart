@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class RoundedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: new RaisedButton(
-        shape: new StadiumBorder(),
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: RaisedButton(
+        shape: StadiumBorder(),
         color: (this.color == null) ? Theme.of(context).primaryColor : this.color,
         textColor: (this.fontcolor == null)
             ? Theme.of(context).canvasColor
             : this.fontcolor,
-        child: new Text(this.text),
+        child: Text(this.text),
         onPressed: this.onPressed,
       ),
     );
