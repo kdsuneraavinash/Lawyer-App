@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
@@ -8,8 +9,19 @@ class Requests {
   http.Client client;
   List<Map<String, String>> parsedData;
 
+  /// * Ignore SSL Certificate Error
+  bool _certificateCheck(X509Certificate cert, String host, int port) =>
+    host == 'www.lawnet.gov.lk';
+
+  /// * Certificate Error Fix
+  http.Client lawnetClient(){
+    var ioClient = HttpClient()
+      ..badCertificateCallback = _certificateCheck;
+  return http.IOClient(ioClient);
+  }
+
   Requests() {
-    client = http.Client();
+    client = lawnetClient();
   }
 
   /// * Build Search Options
