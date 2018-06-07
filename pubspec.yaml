@@ -35,16 +35,6 @@ flutter:
     - assets/images/lawnet_background.jpg
     - assets/images/male.png
     - assets/images/female.png
-    - assets/fonts/roboto/Roboto-Bold.ttf
-    - assets/fonts/roboto/Roboto-BoldItalic.ttf
-    - assets/fonts/roboto/Roboto-Italic.ttf
-    - assets/fonts/roboto/Roboto-Light.ttf
-    - assets/fonts/roboto/Roboto-LightItalic.ttf
-    - assets/fonts/roboto/Roboto-Medium.ttf
-    - assets/fonts/roboto/Roboto-MediumItalic.ttf
-    - assets/fonts/roboto/Roboto-Regular.ttf
-    - assets/fonts/roboto/Roboto-Thin.ttf
-    - assets/fonts/roboto/Roboto-ThinItalic.ttf
 
   fonts:
     - family: Roboto
@@ -72,7 +62,7 @@ flutter:
         - asset: assets/fonts/roboto/Roboto-Thin.ttf
         - asset: assets/fonts/roboto/Roboto-ThinItalic.ttf
           style: italic
-    
+  
     
     
 

@@ -18,11 +18,16 @@ class WelcomePage extends StatefulWidget {
 class WelcomePageState extends State<WelcomePage> {
   int currentPage;
   List<Widget> pages;
+  PageController pageController;
 
   @override
   initState() {
     pages = [StartupDirectory(), StartupLawnet(), SettingsPage()];
     currentPage = 0;
+    pageController = new PageController(
+      initialPage: currentPage,
+      keepPage: true,
+    );
     super.initState();
   }
 
@@ -30,7 +35,9 @@ class WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        
+        controller: pageController,
+        children: pages,
+        onPageChanged: _handlePageChanged,
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _handleBottomAppBarTapped,
@@ -61,9 +68,19 @@ class WelcomePageState extends State<WelcomePage> {
     );
   }
 
+  _handlePageChanged(int page){
+    setState(() {
+      currentPage = page;
+    });
+  }
+
   void _handleBottomAppBarTapped(int index) {
     setState(() {
-      currentPage = index;
+      pageController.animateToPage(
+        index,
+        curve: Curves.easeIn,
+        duration: Duration(milliseconds: 200),
+      );
     });
   }
 }
