@@ -16,24 +16,19 @@ enum LaunchMethod { MAIL, CALL, MESSAGE }
 class LawyerDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      // ! Unclean : Find a good way to change entire app theme
-      data: themeData,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(lawyer.name),
-          elevation: 0.0,
-        ),
-        body: LawyerDetailsPageContent(
-          lawyer: this.lawyer,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(lawyer.name),
+        elevation: 0.0,
+      ),
+      body: LawyerDetailsPageContent(
+        lawyer: this.lawyer,
       ),
     );
   }
 
-  LawyerDetailsPage({@required this.lawyer, @required this.themeData});
+  LawyerDetailsPage({@required this.lawyer});
   final Lawyer lawyer;
-  final ThemeData themeData;
 }
 
 class LawyerDetailsPageContent extends StatelessWidget {

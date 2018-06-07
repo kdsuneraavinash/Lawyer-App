@@ -19,7 +19,6 @@ class PushButton extends StatelessWidget {
         onPressed: function,
         color: Theme.of(context).cardColor,
         splashColor: this.splashColor,
-        disabledColor: Colors.grey,
       ),
     );
   }

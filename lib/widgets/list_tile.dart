@@ -13,7 +13,7 @@ class LawyerListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(4.0),
+      padding: EdgeInsets.all(7.0),
       child: Column(
         children: <Widget>[
           Row(
@@ -53,10 +53,6 @@ class LawyerListTile extends StatelessWidget {
                 ),
               )
             ],
-          ),
-          Divider(
-            indent: 80.0,
-            height: 3.0,
           ),
         ],
       ),

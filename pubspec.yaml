@@ -31,10 +31,50 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/background.jpg
-    - images/lawnet_background.jpg
-    - images/male.png
-    - images/female.png
+    - assets/images/background.jpg
+    - assets/images/lawnet_background.jpg
+    - assets/images/male.png
+    - assets/images/female.png
+    - assets/fonts/roboto/Roboto-Bold.ttf
+    - assets/fonts/roboto/Roboto-BoldItalic.ttf
+    - assets/fonts/roboto/Roboto-Italic.ttf
+    - assets/fonts/roboto/Roboto-Light.ttf
+    - assets/fonts/roboto/Roboto-LightItalic.ttf
+    - assets/fonts/roboto/Roboto-Medium.ttf
+    - assets/fonts/roboto/Roboto-MediumItalic.ttf
+    - assets/fonts/roboto/Roboto-Regular.ttf
+    - assets/fonts/roboto/Roboto-Thin.ttf
+    - assets/fonts/roboto/Roboto-ThinItalic.ttf
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/roboto/Roboto-Italic.ttf
+          style: italic
+    - family: RobotoBlack
+      fonts:
+        - asset: assets/fonts/roboto/Roboto-Black.ttf
+        - asset: assets/fonts/roboto/Roboto-BlackItalic.ttf
+          style: italic
+    - family: RobotoLight
+      fonts:
+        - asset: assets/fonts/roboto/Roboto-Light.ttf
+        - asset: assets/fonts/roboto/Roboto-LightItalic.ttf
+          style: italic
+    - family: RobotoMedium
+      fonts:
+        - asset: assets/fonts/roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/roboto/Roboto-MediumItalic.ttf
+          style: italic
+    - family: RobotoThin
+      fonts:
+        - asset: assets/fonts/roboto/Roboto-Thin.ttf
+        - asset: assets/fonts/roboto/Roboto-ThinItalic.ttf
+          style: italic
+    
+    
+    
 
   # To add assets to your application, add an assets section, like this:
   # assets:

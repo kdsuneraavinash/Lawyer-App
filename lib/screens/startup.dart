@@ -21,21 +21,7 @@ class WelcomePageState extends State<WelcomePage> {
 
   @override
   initState() {
-    pages = [
-      StartupDirectory(
-        themeData: ThemeData(
-          primaryColor: Colors.black,
-          accentColor: Colors.black45,
-        ),
-      ),
-      StartupLawnet(
-        themeData: ThemeData(
-          primaryColor: Colors.brown[900],
-          accentColor: Colors.amber,
-        ),
-      ),
-      SettingsPage()
-    ];
+    pages = [StartupDirectory(), StartupLawnet(), SettingsPage()];
     currentPage = 0;
     super.initState();
   }
@@ -43,33 +29,33 @@ class WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[currentPage],
+      body: PageView(
+        
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
         onTap: _handleBottomAppBarTapped,
+        type: BottomNavigationBarType.shifting,
         currentIndex: currentPage,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: defaultTargetPlatform == TargetPlatform.iOS
-                ? Icon(CupertinoIcons.profile_circled)
-                : Icon(Icons.contacts),
-            backgroundColor: Colors.black,
-            title: Text("Directory"),
-          ),
+              icon: defaultTargetPlatform == TargetPlatform.iOS
+                  ? Icon(CupertinoIcons.profile_circled)
+                  : Icon(Icons.contacts),
+              title: Text("Directory"),
+              backgroundColor: Colors.black),
           BottomNavigationBarItem(
             icon: defaultTargetPlatform == TargetPlatform.iOS
                 ? Icon(CupertinoIcons.search)
                 : Icon(Icons.search),
-            backgroundColor: Colors.brown[900],
             title: Text("LawNet"),
+            backgroundColor: Colors.brown[800],
           ),
           BottomNavigationBarItem(
-            icon: defaultTargetPlatform == TargetPlatform.iOS
-                ? Icon(CupertinoIcons.info)
-                : Icon(Icons.settings_applications),
-            backgroundColor: Theme.of(context).primaryColor,
-            title: Text("Settings"),
-          ),
+              icon: defaultTargetPlatform == TargetPlatform.iOS
+                  ? Icon(CupertinoIcons.info)
+                  : Icon(Icons.settings_applications),
+              title: Text("Settings"),
+              backgroundColor: Colors.black),
         ],
       ),
     );

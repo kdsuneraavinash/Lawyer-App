@@ -14,9 +14,6 @@ import 'package:lawyer_app/widgets/container_card.dart' show ContainerCard;
 /// > Header - Image
 /// > Center - Area with background image with search box
 class StartupDirectory extends StatefulWidget {
-  StartupDirectory({@required this.themeData});
-  final ThemeData themeData;
-
   @override
   State<StatefulWidget> createState() => StartupDirectoryState();
 }
@@ -27,20 +24,17 @@ class StartupDirectoryState extends State<StartupDirectory> {
   /// * Main page with background Image
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: this.widget.themeData,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            // TODO: Add a more beautiful Image
-            image: AssetImage("images/background.jpg"),
-            fit: BoxFit.fitWidth,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          // TODO: Add a more beautiful Image
+          image: AssetImage("assets/images/background.jpg"),
+          fit: BoxFit.cover,
         ),
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: _buildCenterContainer(context),
       ),
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: _buildCenterContainer(context),
     );
   }
 
@@ -68,7 +62,8 @@ class StartupDirectoryState extends State<StartupDirectory> {
                   onPressed: () => null,
                 ),
                 Tooltip(
-                  message: "Show all Lawyers in ${this._selectedDistrict}",
+                  message:
+                      "Show all Lawyers in ${districts[this._selectedDistrict]}",
                   child: RoundedButton(
                     text: "Show Lawyers",
                     onPressed: _handleSearchPressed,
@@ -88,12 +83,8 @@ class StartupDirectoryState extends State<StartupDirectory> {
     return Container(
       padding: EdgeInsets.all(8.0),
       child: Text(
-        "Find your lawyer",
-        style: TextStyle(
-          fontSize: 24.0,
-          fontFamily: "serif",
-          fontWeight: FontWeight.w500,
-        ),
+        "Lawyers' Directory",
+        style: Theme.of(context).textTheme.headline,
       ),
     );
   }
@@ -104,10 +95,7 @@ class StartupDirectoryState extends State<StartupDirectory> {
     return Container(
       child: Text(
         "Select District",
-        style: TextStyle(
-          fontWeight: FontWeight.w900,
-          letterSpacing: 1.0,
-        ),
+        style: Theme.of(context).textTheme.subhead,
       ),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.all(8.0),
@@ -125,12 +113,18 @@ class StartupDirectoryState extends State<StartupDirectory> {
       child: Tooltip(
         message: "Set the District to Search",
         child: RaisedButton(
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(8.0),
-            child: Text(districts[_selectedDistrict]),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text(districts[_selectedDistrict]),
+              ),
+              Icon(Icons.arrow_drop_down)
+            ],
           ),
           onPressed: () => _handleSelectDistrict(context),
+          color: Theme.of(context).backgroundColor,
         ),
       ),
     );
@@ -144,12 +138,9 @@ class StartupDirectoryState extends State<StartupDirectory> {
             opaque: false,
             pageBuilder: (_, __, ___) => LawyerListPage(
                   district: districts[_selectedDistrict],
-                  // ! Unclean : Find a good way to change entire app theme
-                  themeData: this.widget.themeData
                 ),
             transitionsBuilder:
                 (_, Animation<double> animation, __, Widget child) {
-                  
               return FadeTransition(
                 opacity: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
                 child: child,
@@ -160,7 +151,7 @@ class StartupDirectoryState extends State<StartupDirectory> {
   }
 
   /// * Handle Select District Button Tap
-  void _handleSelectDistrict(BuildContext context) async{
+  void _handleSelectDistrict(BuildContext context) async {
     // ! Not clean - Fix
     List<int> _selectedDistrictObj = [_selectedDistrict];
     await showDialog(

@@ -23,17 +23,15 @@ class _RadioDialogState extends State<RadioDialog> {
     return SimpleDialog(
       children: _buildOptionsList(),
       title: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(this.widget.title),
-            IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () => Navigator.pop(context))
-          ],
-        ),
-      ),
+          padding: EdgeInsets.all(8.0),
+          child: new FlatButton.icon(
+            icon: Icon(Icons.done),
+            label: Text(
+              "Done",
+              style: Theme.of(context).textTheme.title,
+            ),
+            onPressed: () => Navigator.pop(context),
+          )),
     );
   }
 
@@ -97,7 +95,7 @@ class _RadioDialogState extends State<RadioDialog> {
   /// Will Update User Interface and Exit
   void _handleOptionClick(BuildContext context, int index) {
     setState(() {
-      this.widget.selectedIndexObj[0] = index;
-    });
+          this.widget.selectedIndexObj[0] = index;
+        });
   }
 }

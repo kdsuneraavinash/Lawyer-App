@@ -17,14 +17,8 @@ import 'package:lawyer_app/widgets/rounded_button.dart' show RoundedButton;
 class StartupLawnet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Theme(
-      child: StartupLawnetContent(),
-      data: themeData,
-    );
+    return StartupLawnetContent();
   }
-
-  StartupLawnet({@required this.themeData});
-  final ThemeData themeData;
 }
 
 class StartupLawnetContent extends StatefulWidget {
@@ -72,8 +66,8 @@ class StartupLawnetContentState extends State<StartupLawnetContent> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("images/lawnet_background.jpg"),
-          fit: BoxFit.fitWidth,
+          image: AssetImage("assets/images/lawnet_background.jpg"),
+          fit: BoxFit.cover,
         ),
       ),
       child: ListView(
@@ -146,39 +140,44 @@ class StartupLawnetContentState extends State<StartupLawnetContent> {
   Widget _buildSearchReult(Map<String, String> block) {
     return InkWell(
       onTap: () => _launchUrl("${block["link"]}"),
-      child: ContainerCard(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                "${block["title"]} [${block["date"]}]",
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                border: Border.all(
-                  color: Colors.black,
+      child: new Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ContainerCard(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "${block["title"]} [${block["date"]}]",
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                "${block["content"]}",
-                style: TextStyle(
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w400,
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-                textAlign: TextAlign.left,
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "${block["content"]}",
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -216,7 +215,7 @@ class StartupLawnetContentState extends State<StartupLawnetContent> {
             child: new Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text("Error while Searching.\n"
-                  "Do you have an active network connection?\n\n"),
+                  "Do you have an active network connection?"),
             ),
           ),
         ),

@@ -11,7 +11,7 @@ class LawyerAvatar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5.0),
       child: Image.asset(
-        (sex == Sex.MALE) ? "images/male.png" : "images/female.png",
+        (sex == Sex.MALE) ? "assets/images/male.png" : "assets/images/female.png",
         width: this.width,
         fit: BoxFit.fitWidth,
       ),

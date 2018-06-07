@@ -7,9 +7,9 @@ class RoundedButton extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: RaisedButton(
         shape: StadiumBorder(),
-        color: (this.color == null) ? Theme.of(context).primaryColor : this.color,
+        color: (this.color == null) ? Theme.of(context).buttonColor : this.color,
         textColor: (this.fontcolor == null)
-            ? Theme.of(context).canvasColor
+            ? Theme.of(context).textTheme.button.color
             : this.fontcolor,
         child: Text(this.text),
         onPressed: this.onPressed,

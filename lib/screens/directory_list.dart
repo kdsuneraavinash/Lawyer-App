@@ -9,30 +9,22 @@ import 'package:lawyer_app/utils/lawyer.dart' show Lawyer;
 ///
 /// TODO: Connect with a database to retrieve data.
 class LawyerListPage extends StatelessWidget {
-  // ! Unclean : Find a good way to change entire app theme
-  LawyerListPage({@required this.district, @required this.themeData});
+  LawyerListPage({@required this.district});
   final String district;
-  final ThemeData themeData;
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("${this.district}"),
-        ),
-        body: LawyerListPageContent(themeData: this.themeData),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("${this.district}"),
       ),
-      data: this.themeData,
+      body: LawyerListPageContent(),
     );
   }
 }
 
 /// * Creates lawyer list body [StatefulWidget].
 class LawyerListPageContent extends StatefulWidget {
-  LawyerListPageContent({@required this.themeData});
-  final ThemeData themeData;
-
   @override
   LawyerListPageContentState createState() => LawyerListPageContentState();
 }
@@ -58,7 +50,6 @@ class LawyerListPageContentState extends State<LawyerListPageContent> {
       itemCount: _lawyers.length,
       itemBuilder: (_, index) => LawyerListItem(
             lawyer: _lawyers[index],
-            themeData: this.widget.themeData,
           ),
     );
   }
@@ -68,9 +59,8 @@ class LawyerListPageContentState extends State<LawyerListPageContent> {
 /// This will only hold Lawyer name, short description and a small coloured circle.
 /// Will also pass lawyer info for LawyerListItem.
 class LawyerListItem extends StatefulWidget {
-  LawyerListItem({this.lawyer, this.themeData});
+  LawyerListItem({this.lawyer});
   final Lawyer lawyer;
-  final ThemeData themeData;
 
   @override
   State createState() => LawyerListItemState();
@@ -86,9 +76,8 @@ class LawyerListItemState extends State<LawyerListItem> {
           PageRouteBuilder(
             opaque: false,
             pageBuilder: (_, __, ___) => LawyerDetailsPage(
-                // ! Unclean : Find a good way to change entire app theme
-                lawyer: this.widget.lawyer,
-                themeData: this.widget.themeData),
+                  lawyer: this.widget.lawyer,
+                ),
             transitionsBuilder:
                 (_, Animation<double> animation, __, Widget child) {
               return SlideTransition(
