@@ -24,7 +24,7 @@ class _RadioDialogState extends State<RadioDialog> {
       children: _buildOptionsList(),
       title: Padding(
           padding: EdgeInsets.all(8.0),
-          child: new FlatButton.icon(
+          child: new OutlineButton.icon(
             icon: Icon(Icons.done),
             label: Text(
               "Done",

@@ -22,7 +22,7 @@ class SettingsDialogState extends State<SettingsDialog> {
             "All of the content will be searched.", 2),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: FlatButton(
+          child: OutlineButton(
             child: Text("OK"),
             textColor: Theme.of(context).primaryColor,
             onPressed: () => Navigator.pop(context),

@@ -14,27 +14,45 @@ ThemeData _buildAndroidTheme() {
     buttonColor: Colors.black,
     dividerColor: Colors.black,
     textTheme: TextTheme(
-      body1: TextStyle(color: Colors.black),
-      button: TextStyle(color: Colors.white),
+      body1: TextStyle(
+        color: Colors.black,
+        fontFamily: "Roboto",
+      ),
+      body2: TextStyle(
+        color: Colors.black,
+        fontFamily: "Roboto",
+        fontSize: 17.0,
+      ),
+      button: TextStyle(
+        color: Colors.white,
+        fontFamily: "RobotoLight",
+      ),
       headline: TextStyle(
         fontSize: 24.0,
         fontWeight: FontWeight.w700,
         color: Colors.black,
+        fontFamily: "RobotoBlack",
       ),
       subhead: TextStyle(
         fontWeight: FontWeight.w500,
         letterSpacing: 1.3,
         color: Colors.black,
-        fontSize: 13.0
+        fontSize: 14.0,
+        fontFamily: "RobotoMedium",
       ),
       title: TextStyle(
         color: Colors.black,
-        fontWeight: FontWeight.w600
+        fontWeight: FontWeight.w600,
+        fontFamily: "RobotoBlack",
       ),
       caption: TextStyle(
-        color: Colors.black
-      )
+        color: Colors.black,
+        fontFamily: "RobotoThin",
+      ),
+      display1: TextStyle(
+        color: Colors.black,
+        fontFamily: "RobotoBlack",
+      ),
     ),
-    
   );
 }

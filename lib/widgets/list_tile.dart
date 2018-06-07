@@ -13,7 +13,7 @@ class LawyerListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(7.0),
+      padding: EdgeInsets.all(4.0),
       child: Column(
         children: <Widget>[
           Row(
@@ -35,19 +35,12 @@ class LawyerListTile extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 2.0),
                       child: Text(
                         this.lawyer.name,
-                        style: TextStyle(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.body2,
                       ),
                     ),
                     Text(
                       this.lawyer.title,
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.italic,
-                      ),
+                      style: Theme.of(context).textTheme.caption,
                     ),
                   ],
                 ),
